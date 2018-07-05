@@ -30,6 +30,7 @@
 #define FAN_3       3
 #define FAN_4       4
 #define FAN_5       5
+#define FAN_QUIET   6
 
 // Vertical air directions. Note that these cannot be set on all heat pumps
 #define VDIR_AUTO   0
