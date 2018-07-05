@@ -17,13 +17,13 @@ void DaikinHeatpumpARC480IR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t op
   uint8_t powerMode 	= DAIKIN_AIRCON2_MODE_OFF | DAIKIN_AIRCON2_MODE_ON;
   uint8_t operatingMode = DAIKIN_AIRCON2_MODE_AUTO;
   uint8_t fanSpeed      = DAIKIN_AIRCON2_FAN_AUTO;
-  uint8_t temperature   = 0x10; // 18 deg
+  uint8_t temperature   = 0x28; // 18 deg
 
   if ((operatingModeCmd == MODE_HEAT && temperatureCmd >= 14 && temperatureCmd <= 28) ||
       (operatingModeCmd == MODE_COOL && temperatureCmd >= 18 && temperatureCmd <= 32) ||
       (temperatureCmd >= 18 && temperatureCmd <= 28))
   {
-    temperature = (temperatureCmd << 1) - 20;
+    //temperature = temperatureCmd << 1;
   }
 
   switch (powerModeCmd)
@@ -118,13 +118,10 @@ void DaikinHeatpumpARC480IR::sendDaikin(IRSender& IR, uint8_t powerMode, uint8_t
   IR.setFrequency(38);
 
   // Header
-  //IR.mark(DAIKIN_AIRCON2_HDR_MARK);
-  IR.space(DAIKIN_AIRCON2_HDR_SPACE);
-
-  // First header
-  /*for (int i=0; i<1; i++) {
-    IR.sendIRbyte(daikinTemplate[i], DAIKIN_AIRCON2_BIT_MARK, DAIKIN_AIRCON2_ZERO_SPACE, DAIKIN_AIRCON2_ONE_SPACE);
-  }*/
+  for (int i=0; i<5; i++) {
+    IR.mark(DAIKIN_AIRCON2_BIT_MARK);
+	IR.space(DAIKIN_AIRCON2_ZERO_SPACE);
+  }
 
   // Pause + new header
   IR.mark(DAIKIN_AIRCON2_BIT_MARK);
