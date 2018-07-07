@@ -6,7 +6,6 @@
 
 #include <HeatpumpIR.h>
 
-
 // Daikin timing constants
 #define DAIKIN_AIRCON2_HDR_MARK   3530
 #define DAIKIN_AIRCON2_HDR_SPACE  1325
@@ -36,15 +35,13 @@
 #define DAIKIN_AIRCON2_CONFORT    0x02
 #define DAIKIN_AIRCON2_ECOCONFORT 0x06
 
-
 class DaikinHeatpumpARC480IR : public HeatpumpIR
 {
   public:
     DaikinHeatpumpARC480IR();
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
-
+    void DaikinHeatpumpARC480IR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, int temperatureCmd, uint8_t fanSpeedCmd, bool econoCmd, bool powerfullCmd, bool comfortCmd, bool swingCmd);
   private:
-    void sendDaikin(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH);
+    void DaikinHeatpumpARC480IR::sendDaikin(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t powerfull);
 };
 
 #endif
